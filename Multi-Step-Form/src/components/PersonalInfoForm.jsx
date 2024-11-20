@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,12 +25,14 @@ const formSchema = z.object({
   name_6205125829: z.coerce.date(),
 });
 
-function PersonalInfoForm({ nextStep }) {
+function PersonalInfoForm({ nextStep, formData, onFormDataChange }) {
   const [currentStep, setCurrentStep] = useState(0); 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name_6205125829: new Date(),
+      name_3206352202: formData.name_3206352202 || "", 
+      name_4715350398: formData.name_4715350398 || "", 
+      name_6205125829: formData.name_6205125829 || new Date(),
     },
   });
 
@@ -38,8 +40,19 @@ function PersonalInfoForm({ nextStep }) {
     console.log(data);
     toast.success("Form submitted successfully!");
     setCurrentStep(1);
-    nextStep();
+    if (nextStep) {
+      nextStep();
+    } else {
+      console.error("nextStep is not defined");
+    }
+    onFormDataChange(data);
   };
+
+  useEffect(() => {
+    form.setValue("name_3206352202", formData.name_3206352202 || "");
+    form.setValue("name_4715350398", formData.name_4715350398 || "");
+    form.setValue("name_6205125829", formData.name_6205125829 || new Date());
+  }, [formData, form]);
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white">

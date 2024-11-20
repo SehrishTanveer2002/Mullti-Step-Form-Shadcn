@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -19,10 +19,15 @@ const formSchema = z.object({
   name_0630426812: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-function ContactInfoForm({nextStep, prevStep}) {
+function ContactInfoForm({nextStep, prevStep,  formData, onFormDataChange}) {
   const form = useForm({
     resolver: zodResolver(formSchema),
-    mode: "onBlur", 
+    defaultValues: {
+      name_8434018892: formData.name_8434018892 || "", 
+      name_0630426812: formData.name_0630426812 || "", 
+    },
+    // mode: "onBlur", 
+
   });
 
 
@@ -32,13 +37,23 @@ function ContactInfoForm({nextStep, prevStep}) {
     console.log(data);
     toast.success("Form submitted successfully!");
     setCurrentStep(2); 
-    nextStep();
+    if (nextStep) {
+      nextStep();
+    } else {
+      console.error("nextStep is not defined");
+    }
+    onFormDataChange(data);
   };
 
   const handlePrevious = () => {
     setCurrentStep(0);
     prevStep();
   };
+
+  useEffect(() => {
+    form.setValue("name_8434018892", formData.name_8434018892 || ""); 
+    form.setValue("name_0630426812", formData.name_0630426812 || ""); 
+  }, [formData, form]);
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white">
