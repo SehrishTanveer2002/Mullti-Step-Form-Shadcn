@@ -23,10 +23,10 @@ const formSchema = z.object({
 export default function ContactInfoForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
+    mode: "onBlur", 
   });
   const navigate = useNavigate();
 
-  // State to track the current step
   const [currentStep, setCurrentStep] = useState(1);
 
   const onSubmit = (values) => {
@@ -44,12 +44,12 @@ export default function ContactInfoForm() {
   };
 
   const handleNext = () => {
-    setCurrentStep(2); // Update the current step when moving to the next
+    setCurrentStep(2); 
     navigate("/step3");
   };
 
   const handlePrevious = () => {
-    setCurrentStep(0); // Update the current step when going to the previous step
+    setCurrentStep(0);
     navigate("/");
   };
 
@@ -98,7 +98,7 @@ export default function ContactInfoForm() {
                   <FormControl>
                     <Input placeholder="abc123@gmail.com" type="email" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
@@ -112,7 +112,7 @@ export default function ContactInfoForm() {
                   <FormControl>
                     <Input placeholder="password" type="password" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
@@ -126,8 +126,7 @@ export default function ContactInfoForm() {
                 Previous
               </Button>
               <Button
-                type="button"
-                onClick={handleNext}
+                type="submit"
                 className="bg-fuchsia-900 hover:bg-fuchsia-800 text-white"
               >
                 Next
@@ -139,6 +138,7 @@ export default function ContactInfoForm() {
     </div>
   );
 }
+
 
 
 
