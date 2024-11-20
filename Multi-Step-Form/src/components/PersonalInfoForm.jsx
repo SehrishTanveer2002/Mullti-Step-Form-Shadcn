@@ -21,8 +21,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { Calendar as CalendarIcon } from "lucide-react";
 
 const formSchema = z.object({
-  name_3206352202: z.string().min(3, "First name must be at least 3 characters").max(20, "First name must be less than 20 characters"),
-  name_4715350398: z.string().min(3, "Last name must be at least 3 characters").max(20, "Last name must be less than 20 characters"),
+  name_3206352202: z.string().min(3, "FirstName must be atleast 3 characters").max(20, "FirstName must be less than 20 characters"),
+  name_4715350398: z.string().min(3, "LastName must be atleast 3 characters").max(20, "LastName must be less than 20 characters"),
   name_6205125829: z.coerce.date(),
 });
 
@@ -46,7 +46,7 @@ function PersonalInfoForm() {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white">
-      <div className="w-full max-w-3xl bg-white p-10 shadow-lg rounded-lg space-y-8">
+      <div className="w-full max-w-4xl bg-white p-10 shadow-lg rounded-lg space-y-8">
 
         <h1 className="text-3xl font-bold text-black text-center">Multi-Step Registration Form</h1>
 
@@ -85,32 +85,44 @@ function PersonalInfoForm() {
             className="space-y-6"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="name_3206352202"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>First Name:</FormLabel>
-                    <FormControl>
-                      <Input placeholder="First Name" type="text" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="name_4715350398"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Last Name:</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Last Name" type="text" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+  control={form.control}
+  name="name_3206352202"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>First Name:</FormLabel>
+      <FormControl>
+        <Input
+          placeholder="First Name"
+          type="text"
+          {...field}
+          className="w-full sm:w-[245px]" // Fixed width
+        />
+      </FormControl>
+      <FormMessage className="min-h-[20px] break-words" />
+    </FormItem>
+  )}
+/>
+
+<FormField
+  control={form.control}
+  name="name_4715350398"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Last Name:</FormLabel>
+      <FormControl>
+        <Input
+          placeholder="Last Name"
+          type="text"
+          {...field}
+          className="w-full sm:w-[245px]"
+        />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
             </div>
 
             <div>
