@@ -21,8 +21,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { Calendar as CalendarIcon } from "lucide-react";
 
 const formSchema = z.object({
-  name_3206352202: z.string().min(3, "FirstName must be atleast 3 characters").max(20, "FirstName must be less than 20 characters"),
-  name_4715350398: z.string().min(3, "LastName must be atleast 3 characters").max(20, "LastName must be less than 20 characters"),
+  name_3206352202: z.string().min(3, "FirstName must be atleast 3 characters").max(20, "FirstName must be less than 20 char"),
+  name_4715350398: z.string().min(3, "LastName must be atleast 3 characters").max(20, "LastName must be less than 20 char"),
   name_6205125829: z.coerce.date(),
 });
 
