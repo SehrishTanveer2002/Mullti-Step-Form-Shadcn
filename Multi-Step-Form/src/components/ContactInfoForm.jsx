@@ -29,21 +29,9 @@ export default function ContactInfoForm() {
 
   const [currentStep, setCurrentStep] = useState(1);
 
-  const onSubmit = (values) => {
-    try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
-    } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
-    }
-  };
-
-  const handleNext = () => {
+  const onSubmit = (data) => {
+    console.log(data);
+    toast.success("Form submitted successfully!");
     setCurrentStep(2); 
     navigate("/step3");
   };
