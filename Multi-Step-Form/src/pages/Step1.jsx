@@ -1,10 +1,10 @@
 import PersonalInfoForm from "@/components/PersonalInfoForm";
 import React from "react";
 
-function Step1() {
+function Step1({ nextStep }) {
   return (
     <div>
-      <PersonalInfoForm />
+      <PersonalInfoForm nextStep={nextStep}  />
     </div>
   );
 }

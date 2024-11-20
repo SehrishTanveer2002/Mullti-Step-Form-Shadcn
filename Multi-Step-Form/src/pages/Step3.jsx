@@ -2,10 +2,10 @@
 import AddressInfoForm from "@/components/AdressInfoForm";
 import React from "react";
 
-function Step3() {
+function Step3({prevStep}) {
   return (
     <div className="step-1-container">
-      <AddressInfoForm/>
+      <AddressInfoForm  prevStep={prevStep}/>
     </div>
   );
 }

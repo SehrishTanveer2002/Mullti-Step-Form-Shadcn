@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import {
   Form,
   FormControl,
@@ -26,7 +25,7 @@ const formSchema = z.object({
   name_6205125829: z.coerce.date(),
 });
 
-function PersonalInfoForm() {
+function PersonalInfoForm({ nextStep }) {
   const [currentStep, setCurrentStep] = useState(0); 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -35,13 +34,11 @@ function PersonalInfoForm() {
     },
   });
 
-  const navigate = useNavigate();
-
   const onSubmit = (data) => {
     console.log(data);
     toast.success("Form submitted successfully!");
-    setCurrentStep(1); 
-    navigate("/step2");
+    setCurrentStep(1);
+    nextStep();
   };
 
   return (

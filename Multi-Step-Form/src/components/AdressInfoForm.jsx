@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   name_7308064619: z
@@ -31,8 +30,7 @@ const formSchema = z.object({
     .max(10, "ZipCode must be less than 10 characters"),
 });
 
-export default function AddressInfoForm() {
-  const navigate = useNavigate();
+export default function AddressInfoForm({prevStep}) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [currentStep, setCurrentStep] = useState(2);
 
@@ -52,12 +50,11 @@ export default function AddressInfoForm() {
   };
 
   const handlePrevious = () => {
-    navigate("/step2");
     setCurrentStep(1);
+    prevStep();
   };
 
   const handleNext = () => {
-    navigate("/step3");
     setCurrentStep(3);
   };
 

@@ -13,19 +13,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   name_8434018892: z.string().email("Invalid email address").min(1, "Email is required"),
   name_0630426812: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-export default function ContactInfoForm() {
+function ContactInfoForm({nextStep, prevStep}) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     mode: "onBlur", 
   });
-  const navigate = useNavigate();
+
 
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -33,12 +32,12 @@ export default function ContactInfoForm() {
     console.log(data);
     toast.success("Form submitted successfully!");
     setCurrentStep(2); 
-    navigate("/step3");
+    nextStep();
   };
 
   const handlePrevious = () => {
     setCurrentStep(0);
-    navigate("/");
+    prevStep();
   };
 
   return (
@@ -127,6 +126,6 @@ export default function ContactInfoForm() {
   );
 }
 
-
+export default ContactInfoForm;
 
 
